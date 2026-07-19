@@ -44,10 +44,10 @@ button { color: inherit; }
 .hero {
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  align-items: stretch;
   margin: 0 -14px;
-  padding: calc(26px + env(safe-area-inset-top)) 22px 36px;
+  padding: calc(24px + env(safe-area-inset-top)) 22px 24px;
   color: #fff;
   overflow: hidden;
   background: linear-gradient(135deg, #075ce7, #1489ff 68%, #30a9ff);
@@ -79,9 +79,13 @@ button { color: inherit; }
   font-weight: 900;
 }
 
-.hero > div:last-child { position: relative; z-index: 1; }
+.hero-title-row { position: relative; z-index: 1; display: flex; align-items: center; gap: 14px; min-width: 0; }
+.hero-title-row > div:last-child { min-width: 0; }
 .hero h1 { margin: 0; font-size: 27px; line-height: 1.2; letter-spacing: .5px; }
 .hero-subtitle { margin: 6px 0 0; color: rgba(255,255,255,.76); font-size: 13px; }
+.hero-warning { position: relative; z-index: 1; width: 100%; display: flex; align-items: flex-start; gap: 7px; margin: 14px 0 0; padding: 9px 11px; border: 1px solid rgba(255,196,196,.9); border-radius: 10px; color: #db2222; background: rgba(255,255,255,.96); box-shadow: 0 5px 14px rgba(69,19,40,.12); font-size: 12px; line-height: 1.55; font-weight: 750; }
+.hero-warning .warning-mark { width: 18px; height: 18px; display: inline-grid; place-items: center; flex: 0 0 auto; margin-top: 1px; border-radius: 50%; color: #fff; background: #e52d2d; font-size: 11px; font-weight: 900; }
+.hero-warning strong { color: #c90000; font-size: 12px; }
 
 .share-card,
 .notice,
