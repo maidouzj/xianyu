@@ -9,7 +9,6 @@ PRODUCT = {
     "share_code": "CZ057",
     "share_text": "【闲鱼】https://m.tb.cn/h.8XBUg2F?tk=sfuugsBb0tM CZ057 「我在闲鱼发布了【codex plus官方渠道代充，账号直接充到自己名下，安全】」",
     "title": "Codex Plus 官方渠道代充",
-    "reward": "0.50",
 }
 
 

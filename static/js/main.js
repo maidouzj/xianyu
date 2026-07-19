@@ -1,23 +1,10 @@
 const toast = document.querySelector("#toast");
-const taskCards = [...document.querySelectorAll(".task-card")];
-const progressText = document.querySelector("#progressText");
-const progressBar = document.querySelector("#progressBar");
-const stickyCount = document.querySelector("#stickyCount");
 const startButton = document.querySelector("#startButton");
 const imageModal = document.querySelector("#imageModal");
 const modalImage = document.querySelector("#modalImage");
 const modalClose = document.querySelector("#modalClose");
 
-const storageKey = "xianyu-task-progress-v2";
-let completedSteps = new Set();
 let toastTimer;
-
-try {
-  const savedSteps = JSON.parse(localStorage.getItem(storageKey) || "[]");
-  completedSteps = new Set(savedSteps.map(Number));
-} catch (error) {
-  completedSteps = new Set();
-}
 
 function showToast(message) {
   toast.textContent = message;
@@ -55,27 +42,7 @@ async function handleCopy(button) {
   }
 }
 
-function renderProgress() {
-  taskCards.forEach((card) => {
-    const step = Number(card.dataset.step);
-    const completed = completedSteps.has(step);
-    card.classList.toggle("completed", completed);
-    const button = card.querySelector(".complete-button");
-    button.innerHTML = completed
-      ? "<span>✓</span> 已完成，点击撤销"
-      : "<span>✓</span> 标记为已完成";
-  });
-
-  const count = completedSteps.size;
-  progressText.textContent = `${count} / 5`;
-  stickyCount.textContent = String(count);
-  progressBar.style.width = `${count * 20}%`;
-  localStorage.setItem(storageKey, JSON.stringify([...completedSteps]));
-
-  if (count === 5) showToast("全部步骤已完成");
-}
-
-document.querySelectorAll(".copy-trigger, #shareText").forEach((button) => {
+document.querySelectorAll(".copy-trigger").forEach((button) => {
   button.addEventListener("click", () => handleCopy(button));
 });
 
@@ -86,15 +53,6 @@ startButton.addEventListener("click", async () => {
       window.location.href = startButton.dataset.url;
     }, 420);
   }
-});
-
-taskCards.forEach((card) => {
-  card.querySelector(".complete-button").addEventListener("click", () => {
-    const step = Number(card.dataset.step);
-    if (completedSteps.has(step)) completedSteps.delete(step);
-    else completedSteps.add(step);
-    renderProgress();
-  });
 });
 
 document.querySelectorAll(".image-preview").forEach((button) => {
@@ -120,5 +78,3 @@ imageModal.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && imageModal.classList.contains("open")) closeModal();
 });
-
-renderProgress();

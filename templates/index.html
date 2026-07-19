@@ -13,20 +13,10 @@
     <header class="hero">
       <div class="hero-mark" aria-hidden="true">闲</div>
       <div>
-        <p class="eyebrow">一次任务 + 二次任务</p>
         <h1>闲鱼任务说明</h1>
         <p class="hero-subtitle">请严格按照下方顺序完成全部步骤</p>
       </div>
     </header>
-
-    <section class="reward-card" aria-label="任务佣金">
-      <div class="coin" aria-hidden="true">¥</div>
-      <div class="reward-copy">
-        <span>完成任务奖励</span>
-        <strong><small>¥</small>{{ product.reward }}</strong>
-      </div>
-      <span class="reward-badge">共 5 步</span>
-    </section>
 
     <section class="share-card" aria-labelledby="share-title">
       <div class="section-heading">
@@ -37,10 +27,9 @@
         </div>
       </div>
 
-      <button class="share-text" id="shareText" type="button" data-copy="{{ product.share_text }}" aria-label="复制完整闲鱼口令">
+      <div class="share-text">
         <span>{{ product.share_text }}</span>
-        <i>点击复制</i>
-      </button>
+      </div>
 
       <div class="share-actions">
         <button class="button button-secondary copy-trigger" type="button" data-copy="{{ product.share_text }}">
@@ -63,9 +52,8 @@
           <p>操作流程</p>
           <h2 id="task-title">一次完成全部任务</h2>
         </div>
-        <span id="progressText">0 / 5</span>
+        <span>共 6 步</span>
       </div>
-      <div class="progress-track" aria-hidden="true"><i id="progressBar"></i></div>
 
       <ol class="task-list">
         <li class="task-card" data-step="1">
@@ -74,30 +62,47 @@
             <span class="task-tag">准备</span>
             <h3>复制口令并打开闲鱼</h3>
             <p>复制上方完整口令，打开闲鱼 App，系统会自动识别并进入商品页面。</p>
-            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
           </div>
         </li>
 
         <li class="task-card" data-step="2">
           <div class="step-line"><span class="step-number">02</span><i></i></div>
           <div class="task-content">
-            <span class="task-tag">浏览商品</span>
-            <h3>浏览、收藏并点击“聊一聊”</h3>
+            <span class="task-tag">访问主页</span>
+            <h3>进入卖家店铺并完成关注</h3>
             <ul class="substeps">
               <li><b>1</b>浏览商品详情至少 10 秒</li>
-              <li><b>2</b>进入卖家主页后返回商品</li>
-              <li><b>3</b>收藏商品，再点击底部“聊一聊”</li>
+              <li><b>2</b>点击商品页顶部的卖家名称，进入店铺主页</li>
+              <li><b>3</b>点击“关注”，再选择合适的“夸一夸”标签</li>
             </ul>
-            <button class="image-preview" type="button" data-image="{{ url_for('static', filename='images/product-guide.jpg') }}" aria-label="查看商品页操作示例大图">
-              <img src="{{ url_for('static', filename='images/product-guide.jpg') }}" alt="闲鱼商品详情页操作示例" loading="lazy">
-              <span>点击查看完整示例</span>
-            </button>
-            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
+            <div class="guide-pair">
+              <button class="image-preview entry-preview" type="button" data-image="{{ url_for('static', filename='images/store-entry-guide.jpg') }}" aria-label="查看进入卖家店铺操作示例大图">
+                <img src="{{ url_for('static', filename='images/store-entry-guide.jpg') }}" alt="在闲鱼商品页点击卖家名称进入店铺" loading="lazy">
+                <span><b>①</b> 点击进入店铺</span>
+              </button>
+              <button class="image-preview profile-preview" type="button" data-image="{{ url_for('static', filename='images/seller-profile-guide.png') }}" aria-label="查看关注卖家和夸一夸操作示例大图">
+                <img src="{{ url_for('static', filename='images/seller-profile-guide.png') }}" alt="在闲鱼卖家主页关注店铺并选择夸一夸" loading="lazy">
+                <span><b>②</b> 关注并夸一夸</span>
+              </button>
+            </div>
           </div>
         </li>
 
-        <li class="task-card important" data-step="3">
+        <li class="task-card" data-step="3">
           <div class="step-line"><span class="step-number">03</span><i></i></div>
+          <div class="task-content">
+            <span class="task-tag">返回商品</span>
+            <h3>收藏商品并点击“聊一聊”</h3>
+            <p>完成主页操作后返回商品详情页，先收藏商品，再点击页面底部的“聊一聊”。</p>
+            <button class="image-preview" type="button" data-image="{{ url_for('static', filename='images/product-guide.jpg') }}" aria-label="查看商品页操作示例大图">
+              <img src="{{ url_for('static', filename='images/product-guide.jpg') }}" alt="闲鱼商品详情页收藏和聊一聊操作示例" loading="lazy">
+              <span>点击查看商品页操作示例</span>
+            </button>
+          </div>
+        </li>
+
+        <li class="task-card important" data-step="4">
+          <div class="step-line"><span class="step-number">04</span><i></i></div>
           <div class="task-content">
             <span class="task-tag">联系卖家</span>
             <h3>发送“我想要”，下单暂不付款</h3>
@@ -105,55 +110,46 @@
             <div class="price-flow">
               <span>提交订单</span><i>→</i><span>等待改价</span><i>→</i><strong>¥0.01 付款</strong>
             </div>
-            <button class="image-preview chat-preview" type="button" data-image="{{ url_for('static', filename='images/chat-guide.jpg') }}" aria-label="查看客服聊天示例大图">
-              <img src="{{ url_for('static', filename='images/chat-guide.jpg') }}" alt="与客服沟通改价的聊天示例" loading="lazy">
-              <span>点击查看聊天示例</span>
+            <button class="image-preview chat-preview" type="button" data-image="{{ url_for('static', filename='images/chat-guide.jpg') }}" aria-label="查看下单改价聊天示例大图">
+              <img src="{{ url_for('static', filename='images/chat-guide.jpg') }}" alt="与客服沟通下单和修改价格的聊天示例" loading="lazy">
+              <span>点击查看下单改价聊天示例</span>
             </button>
-            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
           </div>
         </li>
 
-        <li class="task-card" data-step="4">
-          <div class="step-line"><span class="step-number">04</span><i></i></div>
+        <li class="task-card" data-step="5">
+          <div class="step-line"><span class="step-number">05</span><i></i></div>
           <div class="task-content">
             <span class="task-tag">完成订单</span>
             <h3>客服发货后确认收货</h3>
             <p>完成 ¥0.01 付款后等待客服发货，看到订单显示已发货，再点击“确认收货”。</p>
-            <div class="visual-flow" aria-hidden="true">
-              <span class="visual-icon">▣</span><i>客服发货</i><b>→</b><span class="visual-icon orange">✓</span><i>确认收货</i>
-            </div>
-            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
+            <button class="image-preview receipt-preview" type="button" data-image="{{ url_for('static', filename='images/receipt-guide.jpg') }}" aria-label="查看确认收货操作示例大图">
+              <img src="{{ url_for('static', filename='images/receipt-guide.jpg') }}" alt="闲鱼订单确认收货操作示例" loading="lazy">
+              <span>点击查看确认收货示例</span>
+            </button>
           </div>
         </li>
 
-        <li class="task-card last" data-step="5">
-          <div class="step-line"><span class="step-number">05</span></div>
+        <li class="task-card last" data-step="6">
+          <div class="step-line"><span class="step-number">06</span></div>
           <div class="task-content">
             <span class="task-tag">最后一步</span>
             <h3>完成评价并给到好评</h3>
-            <p>确认收货后进入评价页面，根据真实交易体验完成评价，并提交好评。</p>
-            <div class="rating-demo" aria-label="评价示意">
-              <span class="selected">😊<b>好评</b></span>
-              <span>😐<b>中评</b></span>
-              <span>☹️<b>差评</b></span>
-            </div>
-            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
+            <p>确认收货后进入评价页面，提交好评。</p>
+            <button class="image-preview review-preview" type="button" data-image="{{ url_for('static', filename='images/review-guide.jpg') }}" aria-label="查看商品评价操作示例大图">
+              <img src="{{ url_for('static', filename='images/review-guide.jpg') }}" alt="闲鱼交易完成后的评价操作示例" loading="lazy">
+              <span>点击查看评价示例</span>
+            </button>
           </div>
         </li>
       </ol>
     </section>
 
-    <aside class="safety-tip">
-      <span aria-hidden="true">🛡</span>
-      <p><strong>安全提示</strong>所有沟通、下单和付款均在闲鱼平台内完成，请勿通过其他渠道转账。</p>
-    </aside>
-
-    <footer class="page-footer">完成全部 5 步后，任务流程即结束</footer>
+    <footer class="page-footer">完成全部 6 步后，任务流程即结束</footer>
   </main>
 
   <div class="sticky-action">
     <div class="sticky-inner">
-      <div class="sticky-progress"><span id="stickyCount">0</span><small>/5</small><i>已完成</i></div>
       <button id="startButton" type="button" data-copy="{{ product.share_text }}" data-url="{{ product.share_url }}">复制口令并打开闲鱼</button>
     </div>
   </div>
