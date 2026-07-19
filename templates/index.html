@@ -2,94 +2,169 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Codex Plus 官方渠道代充商品详情">
-  <title>闲鱼商品分享 · Codex Plus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1677ff">
+  <meta name="description" content="闲鱼任务操作说明">
+  <title>闲鱼任务说明</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <main class="page-shell">
-    <section class="share-card" aria-labelledby="share-title">
-      <a class="share-link" href="{{ product.share_url }}" target="_blank" rel="noopener noreferrer">
-        <h1 id="share-title">
-          <span>【闲鱼】{{ product.share_url }}</span>
-          <span>{{ product.share_code }}「我在闲鱼发布了【Codex官方直充 plus续费】」</span>
-        </h1>
-        <span class="open-hint">点击链接直接打开 <span aria-hidden="true">↗</span></span>
-      </a>
+  <main class="mobile-shell">
+    <header class="hero">
+      <div class="hero-mark" aria-hidden="true">闲</div>
+      <div>
+        <p class="eyebrow">一次任务 + 二次任务</p>
+        <h1>闲鱼任务说明</h1>
+        <p class="hero-subtitle">请严格按照下方顺序完成全部步骤</p>
+      </div>
+    </header>
+
+    <section class="reward-card" aria-label="任务佣金">
+      <div class="coin" aria-hidden="true">¥</div>
+      <div class="reward-copy">
+        <span>完成任务奖励</span>
+        <strong><small>¥</small>{{ product.reward }}</strong>
+      </div>
+      <span class="reward-badge">共 5 步</span>
     </section>
 
-    <button class="copy-button" id="copyButton" type="button" data-copy="{{ product.share_text }}">
-      <span class="copy-icon" aria-hidden="true"></span>
-      <span id="copyButtonText">复制口令</span>
-    </button>
+    <section class="share-card" aria-labelledby="share-title">
+      <div class="section-heading">
+        <span class="heading-icon link-icon" aria-hidden="true">↗</span>
+        <div>
+          <p>第一步</p>
+          <h2 id="share-title">复制口令，打开闲鱼</h2>
+        </div>
+      </div>
 
-    <article class="product-card">
-      <header class="seller-row">
-        <div class="seller-info">
-          <div class="avatar" aria-hidden="true">
-            <span class="avatar-hat">✦</span>
-            <span class="avatar-face">AI</span>
+      <button class="share-text" id="shareText" type="button" data-copy="{{ product.share_text }}" aria-label="复制完整闲鱼口令">
+        <span>{{ product.share_text }}</span>
+        <i>点击复制</i>
+      </button>
+
+      <div class="share-actions">
+        <button class="button button-secondary copy-trigger" type="button" data-copy="{{ product.share_text }}">
+          <span class="copy-symbol" aria-hidden="true"></span>复制口令
+        </button>
+        <a class="button button-primary" href="{{ product.share_url }}" rel="noopener noreferrer">
+          打开闲鱼 <span aria-hidden="true">›</span>
+        </a>
+      </div>
+    </section>
+
+    <aside class="notice">
+      <span class="notice-icon" aria-hidden="true">!</span>
+      <p><strong>操作提醒</strong>请按顺序完成任务。下单后先不要付款，必须等待客服将价格修改为 ¥0.01。</p>
+    </aside>
+
+    <section class="task-section" aria-labelledby="task-title">
+      <div class="task-heading">
+        <div>
+          <p>操作流程</p>
+          <h2 id="task-title">一次完成全部任务</h2>
+        </div>
+        <span id="progressText">0 / 5</span>
+      </div>
+      <div class="progress-track" aria-hidden="true"><i id="progressBar"></i></div>
+
+      <ol class="task-list">
+        <li class="task-card" data-step="1">
+          <div class="step-line"><span class="step-number">01</span><i></i></div>
+          <div class="task-content">
+            <span class="task-tag">准备</span>
+            <h3>复制口令并打开闲鱼</h3>
+            <p>复制上方完整口令，打开闲鱼 App，系统会自动识别并进入商品页面。</p>
+            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
           </div>
-          <div class="seller-name-wrap">
-            <div class="seller-name-line">
-              <span class="seller-name">{{ product.seller }}</span>
-              <span class="seller-badge"><span aria-hidden="true">♙</span> {{ product.seller_level }}</span>
+        </li>
+
+        <li class="task-card" data-step="2">
+          <div class="step-line"><span class="step-number">02</span><i></i></div>
+          <div class="task-content">
+            <span class="task-tag">浏览商品</span>
+            <h3>浏览、收藏并点击“聊一聊”</h3>
+            <ul class="substeps">
+              <li><b>1</b>浏览商品详情至少 10 秒</li>
+              <li><b>2</b>进入卖家主页后返回商品</li>
+              <li><b>3</b>收藏商品，再点击底部“聊一聊”</li>
+            </ul>
+            <button class="image-preview" type="button" data-image="{{ url_for('static', filename='images/product-guide.jpg') }}" aria-label="查看商品页操作示例大图">
+              <img src="{{ url_for('static', filename='images/product-guide.jpg') }}" alt="闲鱼商品详情页操作示例" loading="lazy">
+              <span>点击查看完整示例</span>
+            </button>
+            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
+          </div>
+        </li>
+
+        <li class="task-card important" data-step="3">
+          <div class="step-line"><span class="step-number">03</span><i></i></div>
+          <div class="task-content">
+            <span class="task-tag">联系卖家</span>
+            <h3>发送“我想要”，下单暂不付款</h3>
+            <p>私聊客服发送 <mark>我想要</mark>，随后提交商品订单，<strong class="danger-text">不要付款</strong>。</p>
+            <div class="price-flow">
+              <span>提交订单</span><i>→</i><span>等待改价</span><i>→</i><strong>¥0.01 付款</strong>
             </div>
-            <span class="seller-note">信用良好 · 已实名认证</span>
+            <button class="image-preview chat-preview" type="button" data-image="{{ url_for('static', filename='images/chat-guide.jpg') }}" aria-label="查看客服聊天示例大图">
+              <img src="{{ url_for('static', filename='images/chat-guide.jpg') }}" alt="与客服沟通改价的聊天示例" loading="lazy">
+              <span>点击查看聊天示例</span>
+            </button>
+            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
           </div>
-        </div>
-        <div class="seller-meta">{{ product.published }} <i></i> {{ product.location }}</div>
-      </header>
+        </li>
 
-      <section class="product-summary">
-        <div class="price"><span>¥</span>{{ product.price }}</div>
-        <div class="interest"><span>{{ product.wanted }}人想要</span><i></i><span>{{ product.views }}人浏览</span></div>
-        <h2>{{ product.title }}</h2>
-      </section>
+        <li class="task-card" data-step="4">
+          <div class="step-line"><span class="step-number">04</span><i></i></div>
+          <div class="task-content">
+            <span class="task-tag">完成订单</span>
+            <h3>客服发货后确认收货</h3>
+            <p>完成 ¥0.01 付款后等待客服发货，看到订单显示已发货，再点击“确认收货”。</p>
+            <div class="visual-flow" aria-hidden="true">
+              <span class="visual-icon">▣</span><i>客服发货</i><b>→</b><span class="visual-icon orange">✓</span><i>确认收货</i>
+            </div>
+            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
+          </div>
+        </li>
 
-      <dl class="attributes">
-        {% for item in product.attributes %}
-          <div class="attribute-item">
-            <dt>{{ item.label }}</dt>
-            <dd>{{ item.value }}</dd>
+        <li class="task-card last" data-step="5">
+          <div class="step-line"><span class="step-number">05</span></div>
+          <div class="task-content">
+            <span class="task-tag">最后一步</span>
+            <h3>完成评价并给到好评</h3>
+            <p>确认收货后进入评价页面，根据真实交易体验完成评价，并提交好评。</p>
+            <div class="rating-demo" aria-label="评价示意">
+              <span class="selected">😊<b>好评</b></span>
+              <span>😐<b>中评</b></span>
+              <span>☹️<b>差评</b></span>
+            </div>
+            <button class="complete-button" type="button"><span>✓</span> 标记为已完成</button>
           </div>
-        {% endfor %}
-      </dl>
+        </li>
+      </ol>
+    </section>
 
-      <section class="promo" aria-label="Codex 个人独享服务">
-        <div class="promo-glow glow-one"></div>
-        <div class="promo-glow glow-two"></div>
-        <div class="promo-topline">
-          <div class="brand"><span class="brand-mark">P</span> 普拉斯 <b>官方旗舰店</b></div>
-          <div class="promise"><span aria-hidden="true">♢</span> 稳定可靠 · 安全放心</div>
-        </div>
-        <div class="promo-content">
-          <div class="promo-copy">
-            <div class="promo-kicker">AI 助力开发&nbsp;&nbsp; 高效无限可能</div>
-            <div class="codex-word">Codex</div>
-            <div class="exclusive">个人<span>独享</span>服务</div>
-          </div>
-          <div class="ai-panel" aria-hidden="true">
-            <div class="panel-ring"><span>AI</span></div>
-            <div class="panel-lines"><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="bot" aria-hidden="true">
-            <div class="antenna"><i></i></div>
-            <div class="bot-head"><span class="eye left"></span><span class="eye right"></span><span class="smile"></span></div>
-            <div class="bot-body"><span>AI</span></div>
-          </div>
-        </div>
-        <div class="benefits">
-          <span>♢&nbsp; 官方直充&nbsp; 安全可靠</span>
-          <span>◷&nbsp; 快速到账&nbsp; 随时可查</span>
-          <span>♢&nbsp; 专属服务&nbsp; 售后无忧</span>
-        </div>
-      </section>
-    </article>
+    <aside class="safety-tip">
+      <span aria-hidden="true">🛡</span>
+      <p><strong>安全提示</strong>所有沟通、下单和付款均在闲鱼平台内完成，请勿通过其他渠道转账。</p>
+    </aside>
+
+    <footer class="page-footer">完成全部 5 步后，任务流程即结束</footer>
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">口令已复制到剪贴板</div>
+  <div class="sticky-action">
+    <div class="sticky-inner">
+      <div class="sticky-progress"><span id="stickyCount">0</span><small>/5</small><i>已完成</i></div>
+      <button id="startButton" type="button" data-copy="{{ product.share_text }}" data-url="{{ product.share_url }}">复制口令并打开闲鱼</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="image-modal" id="imageModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="操作示例大图">
+    <button class="modal-close" id="modalClose" type="button" aria-label="关闭大图">×</button>
+    <div class="modal-scroll"><img id="modalImage" alt="操作步骤完整示例"></div>
+  </div>
+
   <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </body>
 </html>
