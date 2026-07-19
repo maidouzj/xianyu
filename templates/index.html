@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Codex Plus 官方渠道代充商品详情">
+  <title>闲鱼商品分享 · Codex Plus</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="share-card" aria-labelledby="share-title">
+      <a class="share-link" href="{{ product.share_url }}" target="_blank" rel="noopener noreferrer">
+        <h1 id="share-title">
+          <span>【闲鱼】{{ product.share_url }}</span>
+          <span>{{ product.share_code }}「我在闲鱼发布了【Codex官方直充 plus续费】」</span>
+        </h1>
+        <span class="open-hint">点击链接直接打开 <span aria-hidden="true">↗</span></span>
+      </a>
+    </section>
+
+    <button class="copy-button" id="copyButton" type="button" data-copy="{{ product.share_text }}">
+      <span class="copy-icon" aria-hidden="true"></span>
+      <span id="copyButtonText">复制口令</span>
+    </button>
+
+    <article class="product-card">
+      <header class="seller-row">
+        <div class="seller-info">
+          <div class="avatar" aria-hidden="true">
+            <span class="avatar-hat">✦</span>
+            <span class="avatar-face">AI</span>
+          </div>
+          <div class="seller-name-wrap">
+            <div class="seller-name-line">
+              <span class="seller-name">{{ product.seller }}</span>
+              <span class="seller-badge"><span aria-hidden="true">♙</span> {{ product.seller_level }}</span>
+            </div>
+            <span class="seller-note">信用良好 · 已实名认证</span>
+          </div>
+        </div>
+        <div class="seller-meta">{{ product.published }} <i></i> {{ product.location }}</div>
+      </header>
+
+      <section class="product-summary">
+        <div class="price"><span>¥</span>{{ product.price }}</div>
+        <div class="interest"><span>{{ product.wanted }}人想要</span><i></i><span>{{ product.views }}人浏览</span></div>
+        <h2>{{ product.title }}</h2>
+      </section>
+
+      <dl class="attributes">
+        {% for item in product.attributes %}
+          <div class="attribute-item">
+            <dt>{{ item.label }}</dt>
+            <dd>{{ item.value }}</dd>
+          </div>
+        {% endfor %}
+      </dl>
+
+      <section class="promo" aria-label="Codex 个人独享服务">
+        <div class="promo-glow glow-one"></div>
+        <div class="promo-glow glow-two"></div>
+        <div class="promo-topline">
+          <div class="brand"><span class="brand-mark">P</span> 普拉斯 <b>官方旗舰店</b></div>
+          <div class="promise"><span aria-hidden="true">♢</span> 稳定可靠 · 安全放心</div>
+        </div>
+        <div class="promo-content">
+          <div class="promo-copy">
+            <div class="promo-kicker">AI 助力开发&nbsp;&nbsp; 高效无限可能</div>
+            <div class="codex-word">Codex</div>
+            <div class="exclusive">个人<span>独享</span>服务</div>
+          </div>
+          <div class="ai-panel" aria-hidden="true">
+            <div class="panel-ring"><span>AI</span></div>
+            <div class="panel-lines"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="bot" aria-hidden="true">
+            <div class="antenna"><i></i></div>
+            <div class="bot-head"><span class="eye left"></span><span class="eye right"></span><span class="smile"></span></div>
+            <div class="bot-body"><span>AI</span></div>
+          </div>
+        </div>
+        <div class="benefits">
+          <span>♢&nbsp; 官方直充&nbsp; 安全可靠</span>
+          <span>◷&nbsp; 快速到账&nbsp; 随时可查</span>
+          <span>♢&nbsp; 专属服务&nbsp; 售后无忧</span>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">口令已复制到剪贴板</div>
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
